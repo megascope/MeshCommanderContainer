@@ -1,0 +1,15 @@
+services:
+  meshcommander:
+    build:
+      context: .
+      args:
+        MESHCOMMANDER_VERSION: ${MESHCOMMANDER_VERSION:-0.9.5-a}
+    image: meshcommander:${MESHCOMMANDER_VERSION:-0.9.5-a}
+    container_name: meshcommander
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
