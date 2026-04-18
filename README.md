@@ -59,6 +59,41 @@ The workflow at [`.github/workflows/build-meshcommander.yml`](.github/workflows/
 
 It runs on manual dispatch, on pushes to `main` or `master` that touch the container files, and on a weekly schedule.
 
+## Published package
+
+When the workflow publishes successfully, the container package is available from GitHub Container Registry at:
+
+- [`ghcr.io/megascope/meshcommander`](https://github.com/users/megascope/packages/container/package/meshcommander)
+
+Release-style tags follow this pattern:
+
+- `<npm-version>` for the upstream MeshCommander release, for example `0.9.5-a`
+- `latest` for the most recently published build
+- `sha-<commit>` for traceability back to the source commit
+
+Pull the image:
+
+```bash
+docker pull ghcr.io/megascope/meshcommander:latest
+```
+
+Or pin a specific upstream MeshCommander version:
+
+```bash
+docker pull ghcr.io/megascope/meshcommander:0.9.5-a
+```
+
+Run the published image directly:
+
+```bash
+docker run -d \
+  --name meshcommander \
+  -p 3000:3000 \
+  --cap-drop ALL \
+  --security-opt no-new-privileges:true \
+  ghcr.io/megascope/meshcommander:latest
+```
+
 ## Notes
 
 - The sample compose file defaults to `0.9.5-a`, which matched the latest `meshcommander` package version visible from npm package metadata on April 18, 2026.
