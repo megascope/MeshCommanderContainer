@@ -51,6 +51,7 @@ The sample runtime is hardened with:
 - `tmpfs` mounted at `/tmp`
 - `cap_drop: ALL`
 - `no-new-privileges:true`
+- an internal-only Docker network to prevent normal outbound internet access at runtime while still exposing the published service port
 
 ## GitHub Actions image build
 

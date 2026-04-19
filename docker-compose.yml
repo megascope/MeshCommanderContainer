@@ -15,4 +15,10 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
+    networks:
+      - meshcommander_internal
     restart: unless-stopped
+
+networks:
+  meshcommander_internal:
+    internal: true
