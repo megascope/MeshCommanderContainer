@@ -51,7 +51,9 @@ The sample runtime is hardened with:
 - `tmpfs` mounted at `/tmp`
 - `cap_drop: ALL`
 - `no-new-privileges:true`
-- an internal-only Docker network to prevent normal outbound internet access at runtime while still exposing the published service port
+- loopback-only port publishing by default using `127.0.0.1:${HOST_PORT:-3000}:3000`
+
+If you need remote access, prefer a VPN or authenticated reverse proxy in front of the container instead of publishing it broadly. Restricting outbound internet access is best handled with host firewall rules or platform network policy rather than relying only on Compose networking flags.
 
 ## GitHub Actions image build
 

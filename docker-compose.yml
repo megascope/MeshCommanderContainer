@@ -7,7 +7,7 @@ services:
     image: meshcommander:${MESHCOMMANDER_VERSION:-0.9.5-a}
     container_name: meshcommander
     ports:
-      - "${HOST_PORT:-3000}:3000"
+      - "${HOST_BIND_IP:-127.0.0.1}:${HOST_PORT:-3000}:3000"
     read_only: true
     tmpfs:
       - /tmp
@@ -15,10 +15,4 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
-    networks:
-      - meshcommander_internal
     restart: unless-stopped
-
-networks:
-  meshcommander_internal:
-    internal: true
