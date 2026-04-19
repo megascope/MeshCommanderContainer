@@ -45,6 +45,13 @@ You can override the default version and host port with environment variables:
 MESHCOMMANDER_VERSION=0.9.5-a HOST_PORT=3000 docker compose up --build -d
 ```
 
+The sample runtime is hardened with:
+
+- a read-only root filesystem
+- `tmpfs` mounted at `/tmp`
+- `cap_drop: ALL`
+- `no-new-privileges:true`
+
 ## GitHub Actions image build
 
 The workflow at [`.github/workflows/build-meshcommander.yml`](.github/workflows/build-meshcommander.yml) does the following:
@@ -89,6 +96,8 @@ Run the published image directly:
 docker run -d \
   --name meshcommander \
   -p 3000:3000 \
+  --read-only \
+  --tmpfs /tmp \
   --cap-drop ALL \
   --security-opt no-new-privileges:true \
   ghcr.io/megascope/meshcommander:latest

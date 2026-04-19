@@ -8,6 +8,9 @@ services:
     container_name: meshcommander
     ports:
       - "${HOST_PORT:-3000}:3000"
+    read_only: true
+    tmpfs:
+      - /tmp
     cap_drop:
       - ALL
     security_opt:

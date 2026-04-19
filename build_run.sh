@@ -15,6 +15,8 @@ docker build \
 docker run -d \
   --name "${CONTAINER_NAME}" \
   -p "${HOST_PORT}:${CONTAINER_PORT}" \
+  --read-only \
+  --tmpfs /tmp \
   --cap-drop ALL \
   --security-opt no-new-privileges:true \
   "${IMAGE_NAME}:${MESHCOMMANDER_VERSION}"
